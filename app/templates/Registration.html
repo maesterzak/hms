@@ -1,0 +1,113 @@
+<html>
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Registration Form</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/registration.css' %}">
+</head>
+<body>
+	<div class="container">
+		<div class="module">
+            <p class="inside">REGISTRATION MODULE</p>
+        </div>
+		<form method="post">
+			{% csrf_token %}
+			<div class="form first">
+				<div class="details personal">
+					<span class="title">Personal Details</span>
+					<div class="fields">
+						<div class="input-field">
+							<label>First Name</label>
+							{{RegisterForm.firstName}}
+<!--							<input type="text" placeholder="Enter your First Name" required>-->
+						</div>
+						<div class="input-field">
+							<label>Middle Name</label>
+							{{RegisterForm.middleName}}
+<!--							<input type="text" placeholder="Enter your Middle Name" required>-->
+						</div>
+						<div class="input-field">
+							<label>Last Name</label>
+							{{RegisterForm.lastName}}
+<!--							<input type="text" placeholder="Enter your Last Name" required>-->
+						</div>
+						<div class="input-field">
+							<label>Date of Birth</label>
+							{{RegisterForm.dateOfBirth}}
+<!--							<input type="date" placeholder="Enter your date of birth" required>-->
+						</div>
+						<div class="input-field">
+							 <p>Blood Group</p>
+							{{RegisterForm.bloodGroup}}
+<!--						 <select>-->
+<!--						 	<option>A+</option>-->
+<!--						 	<option>A-</option>-->
+<!--						 	<option>B+</option>-->
+<!--						 	<option>B-</option>-->
+<!--						 	<option>AB+</option>-->
+<!--						 	<option>AB-</option>-->
+<!--						 	<option>O+</option>-->
+<!--						 	<option>O-</option>-->
+<!--						 </select>-->
+						</div>
+						<div class="input-field">
+							 <p>Genotype</p>
+							{{RegisterForm.genoType}}
+<!--						 <select>-->
+<!--						 	<option>AA</option>-->
+<!--						 	<option>AS</option>-->
+<!--						 	<option>SS</option>-->
+<!--						 	<option>AC</option>-->
+<!--						 </select>-->
+						</div>
+						<div class="input-field">
+							<label>Phone Number</label>
+							{{RegisterForm.phoneNumber}}
+<!--							<input type="number" placeholder="Enter your phone number" required>-->
+						</div>
+						<div class="input-field">
+							<label>Email</label>
+							{{RegisterForm.email}}
+<!--							<input type="email" placeholder="Enter your Email" required>-->
+						</div>
+						<div class="input-field">
+						 <p>Gender</p>
+							{{RegisterForm.gender}}
+<!--						 <select>-->
+<!--						 	<option>Male</option>-->
+<!--						 	<option>Female</option>-->
+<!--						 </select>-->
+						</div>
+					</div>
+				</div>
+				<div class="details personal">
+					<span class="title">Next of Kin Details</span>
+					<div class="fields">
+						<div class="input-field">
+							<label>Full Name</label>
+							{{RegisterForm.nextOfKinFullName}}
+<!--							<input type="text" placeholder="Enter their Full Name" required>-->
+						</div>
+						<div class="input-field">
+							<label>Phone Number</label>
+							{{RegisterForm.nextOfKinPhoneNumber}}
+<!--							<input type="Number" placeholder="Enter their phone number" required>-->
+						</div>
+						<div class="input-field">
+							<label>Email</label>
+							{{RegisterForm.nextOfKinEmail}}
+<!--							<input type="email" placeholder="Enter their Email" required>-->
+						</div>
+					</div>
+				</div>
+
+				<button  name="register" type="submit">TO COMPLAINT PAGE</button>
+			</div>
+
+		</form>
+
+	</div>
+</body>
+</html>

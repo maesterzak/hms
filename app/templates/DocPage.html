@@ -1,0 +1,45 @@
+<html>
+{% load static %}
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Doctor's Page</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'DocPage.css'%}">
+</head>
+<body>
+	<div class="container">
+		<div class="module">
+            <p class="inside">DOCTOR MODULE</p>
+        </div>
+		<p>Patient's Name:- <input value={{patient.firstName}} disabled type="text"></p>
+		<div>
+			<p>Patient's Complaint</p>
+			<textarea  class="textBox">{{complain.feeling}}</textarea>
+		</div>
+		<div>
+			<p>Docotor's Note</p>
+			<textarea name="" id="" cols="75" rows="10"></textarea>
+		</div>
+		<div> <p id="diffP">Specialist on Duty:</p>
+		 <select>
+		 	<option>None</option>
+		 	<option>Doctor Ben</option>
+			<option>Doctor Ahmed</option>
+			<option>Doctor Chinanza</option>
+			<option>Doctor Olaniyi</option>
+		</select>
+		</div>
+		<div>
+		<button class="button">
+			<a href="lab.html"><span class="btnText">TO LABORATORY</span></a>
+		</button>
+		</div>
+		<div>
+		<button class="button">
+			<a href="pharmacy.html"><span class="btnText">TO PHARMACY</span></a>
+		</button>
+		</div>
+	</div>
+</body>
+</html>
