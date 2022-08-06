@@ -4,3 +4,6 @@ from .models import *
 
 admin.site.register(Patient)
 admin.site.register(Complaint)
+admin.site.register(Doctor)
+admin.site.register(Pharmacy)
+admin.site.register(Lab)

@@ -1,17 +1,17 @@
 {% load static %}
 <nav class="d-flex justify-content-between align-items-center bg-dark p-3">
     <div class="logo">
-        <a href="{% url 'index' %}"><img src="{% static 'assets/images/logo.svg' %} alt="logo"></a>
+        <a href="index.html"><img src="{% static 'assets/images/logo.svg' %}" alt="logo"></a>
     </div>
     <section class="pocket">
         <ul class="line">
             <li class="uline">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
             </li>
         </ul>
         <ul class="line">
             <li class="uline">
-                <a class="nav-link" href="register.html">Register</a>
+                <a class="nav-link" href="{% url 'register'%}">Register</a>
             </li>
         </ul>
         <ul class="line">
@@ -21,17 +21,17 @@
         </ul>
         <ul class="line">
             <li class="uline">
-                <a class="nav-link" href="complaint.html">Complaints</a>
+                <a class="nav-link" href="nurse.html">Complaints</a>
             </li>
         </ul>
         <ul class="line">
             <li class="uline">
-                <a class="nav-link" href"#">Login</a>
+                <a class="nav-link" href="#">Donate</a>
             </li>
         </ul>
     </section>
     <div class="tabs">
         <button class="btn btn-success"><a class="text-light" href="#">Sign in</a></button>
-        <button class="btn btn-success"><a class="text-light" href="{% url 'register' %}">Register</a></button>
+        <button class="btn btn-success"><a class="text-light" href="{% url 'register'%}">Register</a></button>
     </div>
 </nav>

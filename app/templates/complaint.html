@@ -2,89 +2,65 @@
 {% load static %}
 {% block content %}
 
-    <div  class="Complaint">
-        <div class="module">
-            <p class="inside">COMPLAINT MODULE</p>
-        </div>
-        <form method="post">
-            {% csrf_token %}
-            <span class="drunk"> Welcome {{patient.firstName}} to complaint page, tell us how you feel </span>
-            <div class="drunk1">
-                <h1> NEED HELP?</h1>
+<div  class="Complaint">
+    <div class="module">
+        <p class="inside">NURSE MODULE</p>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <div class="doc">
+            <div class="card" style="width: 27rem;">
+                <div class="card-header">
+                    PROFILE:
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Name:<span class="stable"><input name="name" value="{{patient.firstName}} {{patient.middleName}} {{patient.lastName}}" type="text" disabled /></span></li>
+                    <li class="list-group-item">Registration Number:<span class="stable"><input name="regNumber" value="{{patient.regNumber}}" type="text" disabled></span></li>
+                    <li class="list-group-item">Doctor on File:<span class="stable"><input type="text"></span></li>
+                    <li class="list-group-item">Nurse on File:<span class="stable">{{form.nurse}}</span></li>
+                    <li class="list-group-item">Gender:<span class="stable"><input name="gender" value="{{patient.gender}}" type="text" disabled></span></li>
+                    <li class="list-group-item">Date-Of-Birth: <span class="stable"><input name="dateOfBirth" value="{{patient.dateOfBirth}}" disabled type="text"></span></li>
+                    <li class="list-group-item">Doctor Assigned : <span class="stable"><input type="text"></span></li>
+                </ul>
             </div>
-                <span class="drunk2"><p>-You are to complete the form below and duly express how you feel about the condition/ailment.<br>
-                    -If there is a sensation of pain,please use the lever to give us an idea of the pain Level.<br>
-                    -Select the specialist in area of the field in relating to your ailment.<br>
-                    -Click the submit button when you're done.<br>
-                </p></span>  
-            <div class="Complaint2">
-                <div class="d-grid gap-3">
-                    <div class="p-2 bg-light border">Item 1
-                        <div class="form-group">
-                        
-                            <label for="requests"> Tell Us How You're Feeling?</label>
-                            <br>
-
-                            <textarea name="feeling" id="requests" class ="form-control" cols="45" rows="7" ></textarea>
-                        </div>
+        </div>
+        <div class="middle">
+            <h4 class="false">Personal Info:</h4>
+            <div class="d-grid gap-3">
+                <div class="p-2 bg-light border">Item 1)
+                    <div class="form-group">
+                        <label for="height"> Height?</label>
+                        {{form.height}}
                     </div>
-                    <div class="p-2 bg-light border">Item 2
-                        <div class="form-group">
-                            <label for="pain">Level of pain</label><br>
-
-                            <input  type="range"  id="pain" min="1" max="10" name="painlevel">
-                        </div>
+                </div>
+                <div class="p-2 bg-light border">Item 2)
+                    <div class="form-group">
+                        <label for="weight">Weight?</label>
+                        {{form.weight}}
                     </div>
-                    <div class="p-2 bg-light border">Item 3
-                        <div class="form-group">
-                            <label for="Doc">Please select a Doctor to meet:</label>
-                            <select name="doc" id="Doc" class="form-control">
-                                <option value="GC">General Consultant </option>
-                                <option value="OPT">Optometrist</option>
-                                <option value="OPH">Ophthamologist</option>
-                                <option value="D">Dentist</option>
-                                <option value="GY">Gynaecologist</option>`
-                                <option value="PE">Pediatrician</option>
-                            </select> 
-                        </div>
+                </div>
+                <div class="p-2 bg-light border">Item 3)
+                    <div class="form-group">
+                        <label for="temp">Temperature?</label>
+                        {{form.temperature}}
                     </div>
-                    <div class="p-2 bg-light border">Item 3
-                        <p>4) Gender
-                            <input type="radio" name="sex">Male
-                            <input type="radio" name="sex">Female
-                        </p>
+                </div>
+                <div class="p-2 bg-light border">Item 4)
+                    <div class="form-group">
+                        <label for="bp">Blood Pressure</label>
+                        {{form.bloodPressure}}
                     </div>
                 </div>
             </div>
-           
-            <input type="submit" name="complain" value="complain" class="btn btn-primary btn-lg">
-
-            </input>
-        </form>
-    </div>
-    <div class="footer">
-        <div class="ad5">
-            <p><strong> GET INVOLVED</strong></p>
-            <p><a href="#"></a> Volunteer</p>
-            <p><a href="#"></a>Donate blood</p>
-            <p><a href="#"></a>Seek</p>
-
         </div>
-        <div class="ad6">
-            <p><strong>RESOURCES</strong></p>
-            <p><a href="#"></a>Our Services</p>
-            <p><a href="#"></a>Our Locations</p>
-            <p><a href="#"></a>Our partners</p>
-            <p><a href="#"></a>Our work</p>
-
+        <div class="submit">
+            <button type="submit"  class="btn btn-primary btn-lg">
+               CONTINUE
+            </button>
         </div>
-        <div class="ad7">
-            <p><strong> SOCIAL MEDIA</strong></p>
-            <p><a href="#"></a>TWITTER <i class="fa-brands fa-twitter"></i></p>
-            <p><a href="#"></a>FACEBOOK <i class="fa-brands fa-facebook"></i></p>
-            <p><a href="#"></a>INSTAGRAM <i class="fa-brands fa-instagram"></i></p>
+    </form>
 
-        </div>
-    </div>
+</div>
+
 
     {% endblock content %}

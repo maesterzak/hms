@@ -36,31 +36,53 @@ def registration(request):
 
 def complaints(request, slug):
     patient = Patient.objects.get(regNumber = slug)
+    form = ComplainForm
     if request.method == "POST":
-        if request.POST.get("complain"):
-            # regNumber = request.POST.get("complain")
-            feeling = request.POST.get('feeling')
-            painLevel = request.POST.get('painLevel')
-            doc = request.POST.get('doc')
-            sex = request.POST.get('sex')
-            Complaint.objects.create(
-                patient = patient,
-                feeling = feeling,
-                painLevel = 10,
-                selectDoctor = doc
-            )
-            return redirect('doctor', slug = patient.id)
+        form = ComplainForm(request.POST)
+        if form.is_valid():
 
+            obj=form.save(commit=False)
+            obj.patient = patient
+            obj.save()
+            return redirect('doctor', slug = obj.id)
+        else:
+            print(form.errors)
 
-
-
-
-    context = {'patient': patient, }
+    context = {'patient': patient, "form": form}
     return render(request, 'complaint.html', context)
 
 
 def doctor(request, slug):
-    patient = Patient.objects.get(id = slug)
-    complain = Complaint.objects.get(patient = patient)
-    context = {'patient': patient, 'complain': complain}
+    complain = Complaint.objects.get(id=slug)
+
+    form = DocForm
+    if request.method == 'POST':
+        form = DocForm(request.POST)
+        if form.is_valid():
+            obj=form.save(commit=False)
+            obj.complain = complain
+            obj.save()
+            return redirect('lab', slug = complain.id)
+
+    patient_id = complain.patient.id
+    patient = Patient.objects.get(id=patient_id)
+    context = {'patient': patient, 'complain': complain, "form": form}
     return render(request, 'DocPage.html', context)
+
+
+def lab(request, slug):
+    complain = Complaint.objects.get(id=slug)
+
+    form = LabForm
+    if request.method == 'POST':
+        form = LabForm(request.POST)
+        if form.is_valid():
+            obj=form.save(commit=False)
+            obj.complain = complain
+            obj.save()
+            # return redirect('doctor', slug = obj.id)
+    doctorNote = Doctor.objects.get(complain = complain)
+    patient_id = complain.patient.id
+    patient = Patient.objects.get(id=patient_id)
+    context = {'patient': patient, 'complain': complain, "form": form, 'doctor': doctorNote}
+    return render(request, 'lab.html', context)

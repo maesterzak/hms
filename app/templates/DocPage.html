@@ -1,45 +1,69 @@
-<html>
+{% extends 'components/main.html' %}
 {% load static %}
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Doctor's Page</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'DocPage.css'%}">
-</head>
-<body>
-	<div class="container">
-		<div class="module">
-            <p class="inside">DOCTOR MODULE</p>
-        </div>
-		<p>Patient's Name:- <input value={{patient.firstName}} disabled type="text"></p>
-		<div>
-			<p>Patient's Complaint</p>
-			<textarea  class="textBox">{{complain.feeling}}</textarea>
-		</div>
-		<div>
-			<p>Docotor's Note</p>
-			<textarea name="" id="" cols="75" rows="10"></textarea>
-		</div>
-		<div> <p id="diffP">Specialist on Duty:</p>
-		 <select>
-		 	<option>None</option>
-		 	<option>Doctor Ben</option>
-			<option>Doctor Ahmed</option>
-			<option>Doctor Chinanza</option>
-			<option>Doctor Olaniyi</option>
-		</select>
-		</div>
-		<div>
-		<button class="button">
-			<a href="lab.html"><span class="btnText">TO LABORATORY</span></a>
-		</button>
-		</div>
-		<div>
-		<button class="button">
-			<a href="pharmacy.html"><span class="btnText">TO PHARMACY</span></a>
-		</button>
+{% block content %}
+<br>
+<form method="post" class="Complaint mt-5">
+	{% csrf_token %}
+	<div class="module">
+		<p class="inside">DOCTOR'S MODULE</p>
+	</div>
+	<div class="doc">
+		<div class="card" style="width: 27rem;">
+			<div class="card-header">
+				PROFILE:
+			</div>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">Name:<span class="stable"><input name="name" value="{{patient.firstName}} {{patient.middleName}} {{patient.lastName}}" type="text" disabled /></span></li>
+				<li class="list-group-item">Registration Number:<span class="stable"><input name="regNumber" value="{{patient.regNumber}}" type="text" disabled></span></li>
+				<li class="list-group-item">Doctor on File:<span class="stable"><input type="text"></span></li>
+				<li class="list-group-item">Nurse on File:<span class="stable"><input name="nurse" value="{{complain.nurse}}" type="text" disabled></span></li>
+				<li class="list-group-item">Gender:<span class="stable"><input name="gender" value="{{patient.gender}}" type="text" disabled></span></li>
+				<li class="list-group-item">Date-Of-Birth: <span class="stable"><input name="dateOfBirth" value="{{patient.dateOfBirth}}" disabled type="text"></span></li>
+
+			</ul>
 		</div>
 	</div>
-</body>
-</html>
+	<div class="doc">
+		<div class="card" style="width: 27rem;">
+			<div class="card-header">
+				VITAL SIGNS:
+			</div>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">Height:<span class="stable"><input value="{{complain.height}}" type="text" disabled></span></li>
+				<li class="list-group-item">Weight:<span class="stable"><input value="{{complain.weight}}" type="text" disabled></span></li>
+				<li class="list-group-item">Temperature:<span class="stable"><input value="{{complain.temperature}}" type="text" disabled></span></li>
+				<li class="list-group-item">Blood Pressure:<span class="stable"><input value="{{complain.bloodPressure}}" type="text" disabled></span></li>
+			</ul>
+		</div>
+	</div>
+	<div class="doc">
+		<div>
+			<h4 class="true"> PATIENT COMPLAINT</h4>
+			{{form.patientComplain}}
+		</div>
+	</div>
+	<div class="doc">
+		<div>
+			<h4 class="true"> DOCTOR'S NOTE</h4>
+			{{form.doctorNote}}
+		</div>
+	</div>
+	<div class="doc">
+		<p>You are to head to the Laboratory page or to Pharmacy page</p>
+	</div>
+	<div class="suggestion">
+		<!-- <input type="text" placeholder="suggested lab test">
+        <input type="text" placeholder="recommended drug list"> -->
+		<p>suggest lab test</p>
+		{{form.suggested_lab_test}}
+		<p>suggest drug test</p>
+		{{form.suggested_drug_test}}
+
+	</div>
+	<span class="suggestion">
+                <button type="submit" class="btn btn-info">Laboratory</button>
+                <button class="btn btn-info"><a class="text-light" href="pharmacy.html">PHARMACY</a></button>
+            </span>
+</form>
+
+{% endblock %}

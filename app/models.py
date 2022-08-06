@@ -53,20 +53,52 @@ class Patient(models.Model):
 
 
 class Complaint(models.Model):
-    DOCTOR_CHOICES =(
-        ('General Consultant ', 'General Consultant'),
-        ('General Consultant ', 'General Consultant'),
-        ('General Consultant ', 'General Consultant'),
-        ('General Consultant ', 'General Consultant'),
-
-    )
+    # DOCTOR_CHOICES =(
+    #     ('General Consultant ', 'General Consultant'),
+    #     ('General Consultant ', 'General Consultant'),
+    #     ('General Consultant ', 'General Consultant'),
+    #     ('General Consultant ', 'General Consultant'),
+    #
+    # )
     patient = models.ForeignKey(Patient,on_delete=models.CASCADE)
-    feeling = models.TextField(null=True, blank=True)
-    painLevel = models.IntegerField(default=1)
-    selectDoctor = models.CharField(
-        'Doctor',
-        max_length=30,
-        choices=DOCTOR_CHOICES,
-        default= 'General Consultant'
-    )
+
+    # selectDoctor = models.CharField(
+    #     'Doctor',
+    #     max_length=30,
+    #     choices=DOCTOR_CHOICES,
+    #     default= 'General Consultant'
+    # )
+    nurse = models.CharField(max_length=200)
+    height = models.IntegerField()
+    weight = models.IntegerField()
+    temperature = models.IntegerField()
+    bloodPressure = models.IntegerField()
+
+
+
+class Doctor(models.Model):
+    complain = models.ForeignKey(Complaint, on_delete=models.CASCADE)
     doctorNote = models.TextField(null=True,blank=True)
+    patientComplain = models.TextField()
+    suggested_lab_test = models.TextField(null=True, blank=True)
+    suggested_drug_test = models.TextField(null=True, blank=True)
+
+
+class Lab(models.Model):
+    complaint = models.ForeignKey(Complaint, on_delete=models.CASCADE)
+    test_run = models.CharField(max_length=200)
+    amount = models.IntegerField()
+
+
+class Pharmacy(models.Model):
+    complaint = models.ForeignKey(Complaint, on_delete=models.CASCADE)
+    drug = models.CharField(max_length=200)
+    amount = models.IntegerField()
+
+
+class Bill(models.Model):
+    complaint = models.ForeignKey(Complaint, on_delete=models.CASCADE)
+    doctor_consultancy_fee = models.IntegerField()
+    laboratory_fee = models.IntegerField()
+    pharmacy_fee = models.IntegerField()
+

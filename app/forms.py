@@ -32,8 +32,28 @@ class ComplainForm(ModelForm):
     class Meta:
         model=Complaint
         fields = '__all__'
-        exclude = ['doctorNote']
+        exclude = ['patient']
 
     def __init__(self, *args, **kwargs):
         super(ComplainForm, self).__init__(*args, **kwargs)
+
+
+class DocForm(ModelForm):
+    class Meta:
+        model=Doctor
+        fields = '__all__'
+        exclude = ['complain']
+
+    def __init__(self, *args, **kwargs):
+        super(DocForm, self).__init__(*args, **kwargs)
+
+
+class LabForm(ModelForm):
+    class Meta:
+        model=Lab
+        fields = '__all__'
+        exclude = ['complain']
+
+    def __init__(self, *args, **kwargs):
+        super(LabForm, self).__init__(*args, **kwargs)
 

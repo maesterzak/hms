@@ -10,7 +10,6 @@
     display: flex;
     flex-direction: row;
     width: 75%;
-    border: 1px solid red;
 }
 .line{
     display: flex;
@@ -26,15 +25,10 @@
     width: 80%;
     flex-direction: column;
     justify-content: space-evenly;
-    height: 999px;
-    margin: 0 auto;
-    border: 5px solid  rgb(26, 77, 46);
-}
-.Complaint2{
-    background-color: rgb(26, 77, 46);
 
-    padding-left: ($spacer * .5) !important;
-    padding-right: ($spacer * .5) !important;
+    margin: 0 auto;
+
+    border: 7px solid  rgb(26, 77, 46);
 }
 p{
     margin: 0 !important;
@@ -103,16 +97,52 @@ span{
     padding-inline: 5px !important;
 }
 .ad3{
-    background-color: rgb(26, 77, 46);
+    background-color: white;
+
+    height: 450px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 50px;
+    margin-bottom:50px;
+    margin-left: 70px;
+}
+.joggle{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 95%;
+}
+.forced{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    background-color: ;
+}
+.colorrr{
+    width: 80%;
+}
+.child{
+    background-color: rgba(26, 77, 46, 0.7);
+    width: 90%;
     color: whitesmoke;
-    height: 500px;
+    height: 400px;
+    padding-left: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    font-family: 'Montserrat', sans-serif;
+    font-weight: lighter;
 }
+.child h1{
+    font-weight: bold;
+    font-size: 3rem
+    rgba(26, 77, 46)
+}
+
 .ad4{
-    height: 700px;
+
     background-color: rgba(26, 77, 46, 0.7);
     color: whitesmoke;
     display: flex;
@@ -125,7 +155,7 @@ span{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    height: 300px;
+    height: 250px;
     color: whitesmoke;
 }
 .rr{
@@ -138,6 +168,11 @@ span{
     background-color: rgb(26, 77, 46);
     color: whitesmoke;
 }
+/* .card2{
+    display: flex;
+    justify-content: center;
+    background-color: aquamarine
+} */
 .card-title{
     font-size: 2.0rem;
 }
@@ -150,6 +185,15 @@ span{
 } */
 .true{
     font-size: 1.9rem;
+    width: 84.4%;
+    margin-bottom: 0px;
+    background-color: rgb(26, 77, 46);
+    color: whitesmoke;
+}
+.truee{
+    font-size: 2.0rem;
+    color: whitesmoke;
+    font-weight: bolder;
 }
 .drunk{
     display:flex;
@@ -162,13 +206,9 @@ span{
     display:flex;
     flex-direction: row;
     justify-content: center;
-}.drunk2{
-    display:flex;
-    flex-direction: row;
-    justify-content: center;
 }
 .table{
-    width: 80%;
+    width: 84.4%;
 }
 .module{
     font-size: 2.0rem;
@@ -182,4 +222,48 @@ span{
 }
 .inside{
     padding-top: 25px;
+}
+.middle{
+    padding-top: 40px;
+    padding-left: 30px;
+    width: 96%;
+}
+.false{
+    font-size: 1.9rem;
+    width: 100%;
+    margin-bottom: 0px;
+    background-color: rgb(26, 77, 46);
+    color: whitesmoke;
+}
+.submit{
+    display: flex;
+    justify-content: center;
+}
+.doc{
+    padding-left: 30px;
+}
+.logo{
+    height: 40px;
+    width: 150px;
+}
+.suggestion{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+@media (min-width: 600px) and (max-width: 908px){
+	h1{
+		font-size:8em;
+		color:purple
+	}
+	}
+@media (max-width: 768px){
+	nav{
+		flex-direction: column;
+		justify-content: center;
+	}
+	nav ul{
+		flex-direction: column;
+		justify-content: center;
+	}
 }
