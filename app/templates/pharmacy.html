@@ -41,7 +41,7 @@
             <tbody>
                 {% for items in pharmacyItems %}
                 <tr>
-                    <td>{{items.id}}</td>
+                    <td>{{forloop.counter}}</td>
                     <td>{{items.drug_name}}</td>
                     <td>{{items.amount}} Naira</td>
                     <td></td>

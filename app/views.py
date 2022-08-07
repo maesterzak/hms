@@ -1,4 +1,5 @@
 import datetime
+from multiprocessing import context
 from django.http import HttpResponse
 
 from django.shortcuts import render, redirect
@@ -26,7 +27,7 @@ def registration(request):
 
             obj=registerForm.save(commit=False)
             obj.regNumber=f'{obj.firstName}210'
-            print('dddd', obj.regNumber)
+            
             obj.save()
             registerForm = RegisterForm
             return redirect('complaint', slug = obj.regNumber)
@@ -55,14 +56,14 @@ def complaints(request, slug):
 
 def doctor(request, slug):
     complain = Complaint.objects.get(id=slug)
-    print(complain.id)
+    
     doctorSample = Doctor.objects.filter(complain = complain.id).first()
     if doctorSample is None:
 
         form = DocForm
-        print('iis')
+        
     else:
-        print('exi')
+        
         form = DocForm(instance = doctorSample)
     
     
@@ -152,18 +153,24 @@ def pharmacy(request, slug):
 
 
 def billing(request, slug):
-    complain = Complaint.objects.get(id=slug)
-    lab = Lab.objects.get(complaint = complain.id)
-    lab_tests = LabItems.objects.filter(lab = lab)
-    pharmacy = Pharmacy.objects.get(complaint = complain.id)
-    pharmacyItems = PharmacyItems.objects.filter(pharmacy = pharmacy)
+    consultancyFee = 300
     labTotal = 0
-    for test in lab_tests:
-        labTotal += test.amount
-    pharmacyTotal = 0    
-    for item in pharmacyItems:
-        pharmacyTotal += item.amount
-    total = pharmacyTotal + labTotal    
+    pharmacyTotal = 0
+    complain = Complaint.objects.get(id=slug)
+    lab = Lab.objects.filter(complaint = complain.id).first()
+    if lab is not None:
+        lab_tests = LabItems.objects.filter(lab = lab)
+        for test in lab_tests:
+            labTotal += test.amount
+    pharmacy = Pharmacy.objects.filter(complaint = complain.id).first()
+    
+    if pharmacy is not None:
+        pharmacyItems = PharmacyItems.objects.filter(pharmacy = pharmacy)
+        for item in pharmacyItems:
+            pharmacyTotal += item.amount
+    
+    total = pharmacyTotal + labTotal + consultancyFee    
      
-    context = {'labTotal': labTotal, 'total': total, 'pharmacyTotal': pharmacyTotal}
+    context = {'labTotal': labTotal, 'total': total, 'pharmacyTotal': pharmacyTotal, 'consultancyFee': consultancyFee}
+    
     return render(request, 'billing.html', context)

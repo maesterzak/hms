@@ -13,13 +13,13 @@
               <p class="card-text"> A total cost of the services received during the time of stay.</p>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Doctor Consultancy Fee :- <span class="stable"><input type="text"></li></span>
+              <li class="list-group-item">Doctor Consultancy Fee :- <span class="stable">{{consultancyFee}}</li></span>
               <li class="list-group-item">Laboratory Fee :- <span class="stable">{{labTotal}}</li></span>
               <li class="list-group-item">Pharmacy Fee :- <span class="stable">{{pharmacyTotal}}</li></span>
               <li class="list-group-item"> Total Cost   :- <span class="stable">{{total}}</li></span>
             </ul>
             <div class="card-body">
-              <a href="index.html" class="card-link"> <-Back to home page</a>
+              <a href="{% url 'index' %}" class="card-link"> <-Back to home page</a>
             </div>
         </div>
     </div>
