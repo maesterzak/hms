@@ -1,3 +1,4 @@
+from statistics import mode
 from django.db import models
 
 # Create your models here.
@@ -73,6 +74,7 @@ class Complaint(models.Model):
     weight = models.IntegerField()
     temperature = models.IntegerField()
     bloodPressure = models.IntegerField()
+    doctorName = models.CharField(max_length=200, null=True, blank=True)
 
 
 
@@ -86,17 +88,27 @@ class Doctor(models.Model):
 
 class Lab(models.Model):
     complaint = models.ForeignKey(Complaint, on_delete=models.CASCADE)
+    
+
+
+class LabItems(models.Model):
+    lab = models.ForeignKey(Lab, on_delete=models.CASCADE)
     test_run = models.CharField(max_length=200)
     amount = models.IntegerField()
 
 
 class Pharmacy(models.Model):
     complaint = models.ForeignKey(Complaint, on_delete=models.CASCADE)
-    drug = models.CharField(max_length=200)
+
+
+class PharmacyItems(models.Model):
+    pharmacy = models.ForeignKey(Pharmacy, on_delete=models.CASCADE)
+    drug_name = models.CharField(max_length=200)
     amount = models.IntegerField()
 
 
 class Bill(models.Model):
+    
     complaint = models.ForeignKey(Complaint, on_delete=models.CASCADE)
     doctor_consultancy_fee = models.IntegerField()
     laboratory_fee = models.IntegerField()

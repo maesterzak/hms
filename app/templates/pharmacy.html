@@ -1,105 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;1,600&family=Roboto:wght@400;500;700;900&display=swap"
-        rel="stylesheet">
-        <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Hospital Management System</title>
-</head>
-<body>
-    <div class="Complaint">
-        <div class="module">
-            <p class="inside">PHARMACY MODULE</p>
-        </div>
+{% extends 'components/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="Complaint">
+    <div class="module">
+        <p class="inside">PHARMACY MODULE</p>
+    </div>
+    <div class="doc">
         <div class="card" style="width: 27rem;">
             <div class="card-header">
-              RECEIPTS FOR DRUGS BOUGHT
+              PROFILE:
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Name:<span class="stable"><input type="text"></li></span>
-              <li class="list-group-item">Registration Number:<span class="stable"><input type="text"></li></span>
-              <li class="list-group-item">Doctor on File:<span class="stable"><input type="text"></li></span>
-              <li class="list-group-item">Reference No. :<span class="stable"><input type="text"></li></span>
-              <li class="list-group-item">Date: <span class="stable"><input type="date"></li></span>
+                <li class="list-group-item">Name:<span class="stable"><input name="name" value="{{patient.firstName}} {{patient.middleName}} {{patient.lastName}}" type="text" disabled /></span></li>
+				<li class="list-group-item">Registration Number:<span class="stable"><input name="regNumber" value="{{patient.regNumber}}" type="text" disabled></span></li>
+				<li class="list-group-item">Doctor on File:<span class="stable"><input disabled value="{{complain.doctorName}}" type="text"></span></li>
+				<li class="list-group-item">Nurse on File:<span class="stable"><input name="nurse" value="{{complain.nurse}}" type="text" disabled></span></li>
+				<li class="list-group-item">Gender:<span class="stable"><input name="gender" value="{{patient.gender}}" type="text" disabled></span></li>
+				<li class="list-group-item">Date-Of-Birth: <span class="stable"><input name="dateOfBirth" value="{{patient.dateOfBirth}}" disabled type="text"></span></li>
             </ul>
         </div>
-            <p>Payment Method: checks are not allowed</p>
-         
-           <h4> HERE ARE YOUR RESULTS</h4>
-           <textarea name="" id="" cols="10" rows="7"></textarea>
-           <table class="table table-light">
-            <thead class="table-dark">
+    </div>
+    <div class="doc">
+        <div>
+            <h4 class="true"> DOCTOR'S NOTE</h4>
+            <textarea name="" id="" cols="95" rows="7">{{doctor.doctorNote}}</textarea>
+        </div>
+    </div>
+   
+    <div class="doc">
+        <h4 class="true">LIST:</h4>
+        <table class="table table-light">
+            <thead class="table-primary">
                 <tr>
                     <th>S/N</th>
-                    <th>Types of drugs Bought</th>
+                    <th>Types of Drugs Bought</th>
                     <th>Amount</th>
                 </tr>
             </thead>
             <tbody>
+                {% for items in pharmacyItems %}
                 <tr>
-                    <td>1</td>
-                    <td>Amoxylin bicarbonate</td>
-                    <td>2400</td>
+                    <td>{{items.id}}</td>
+                    <td>{{items.drug_name}}</td>
+                    <td>{{items.amount}} Naira</td>
+                    <td></td>
                 </tr>
+                {% endfor%}
+                
                 <tr>
-                    <td>2</td>
-                    <td>Chloroquinne capsules</td>
-                    <td>4000</td>
-                </tr>
+                    <form method="post" onsubmit="totalCost(event)">
+                        {% csrf_token %}
+                    <td></td>
+                    <td>{{form.drug_name}}</td>
+                    <td>{{form.amount}}</td>
+                    <td><input value="add" type="submit"></td>
+                    </form>
+               </tr>
             </tbody>
             <tfoot>
                 <tr>
-                    <td>total</td>
+                    <td>Total</td>
                     <td></td>
-                    <td>6400</td>
+                    <td>{{total}}</td>
                 </tr>
             </tfoot>
             
             
         </table>
-        <p>You are to head to the billing page or back to complaint page</p>
+        <p>You are to head to the billing page or back to doctor page</p>
             
         <span>
-            <button class="btn btn-success"><a class="text-light" href="billing.html">CONTINUE</a></button>
-            <button class="btn btn-danger"><a class="text-light" href="complaint.html">BACK</a></button>
+            <button class="btn btn-success"><a class="text-light" href="{% url 'billing' slug=complain.id %}">CONTINUE</a></button>
+            <button class="btn btn-danger"><a class="text-light" href="{% url 'doctor' slug=complain.id %}">BACK</a></button>
         </span>
     </div>
        
-    </div>
-    <div class="footer">
-        <div class="ad5">
-            <p><strong> GET INVOLVED</strong></p>
-            <p><a href="#"></a> Volunteer</p>
-            <p><a href="#"></a>Donate blood</p>
-            <p><a href="#"></a>Seek</p>
+</div>
 
-        </div>
-        <div class="ad6">
-            <p><strong>RESOURCES</strong></p>
-            <p><a href="#"></a>Our Services</p>
-            <p><a href="#"></a>Our Locations</p>
-            <p><a href="#"></a>Our partners</p>
-            <p><a href="#"></a>Our work</p>
-
-        </div>
-        <div class="ad7">
-            <p><strong> SOCIAL MEDIA</strong></p>
-            <p><a href="#"></a>TWITTER <i class="fa-brands fa-twitter"></i></p>
-            <p><a href="#"></a>FACEBOOK <i class="fa-brands fa-facebook"></i></p>
-            <p><a href="#"></a>INSTAGRAM <i class="fa-brands fa-instagram"></i></p>
-
-        </div>
-    </div>
-</body>
-</html>
+{% endblock %}

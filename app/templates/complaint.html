@@ -16,11 +16,11 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Name:<span class="stable"><input name="name" value="{{patient.firstName}} {{patient.middleName}} {{patient.lastName}}" type="text" disabled /></span></li>
                     <li class="list-group-item">Registration Number:<span class="stable"><input name="regNumber" value="{{patient.regNumber}}" type="text" disabled></span></li>
-                    <li class="list-group-item">Doctor on File:<span class="stable"><input type="text"></span></li>
+                    <li class="list-group-item">Doctor on File:<span class="stable">{{form.doctorName}}</span></li>
                     <li class="list-group-item">Nurse on File:<span class="stable">{{form.nurse}}</span></li>
                     <li class="list-group-item">Gender:<span class="stable"><input name="gender" value="{{patient.gender}}" type="text" disabled></span></li>
                     <li class="list-group-item">Date-Of-Birth: <span class="stable"><input name="dateOfBirth" value="{{patient.dateOfBirth}}" disabled type="text"></span></li>
-                    <li class="list-group-item">Doctor Assigned : <span class="stable"><input type="text"></span></li>
+                    
                 </ul>
             </div>
         </div>

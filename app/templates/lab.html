@@ -12,21 +12,22 @@
                 PROFILE:
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Name:<span class="stable"><input type="text"></li></span>
-                <li class="list-group-item">Registration Number:<span class="stable"><input type="text"></li></span>
-                <li class="list-group-item">Doctor on File:<span class="stable"><input type="text"></li></span>
-                <li class="list-group-item">Nurse on File:<span class="stable"><input type="text"></li></span>
-                <li class="list-group-item">Age :<span class="stable"><input type="text"></li></span>
-                <li class="list-group-item">Gender: <span class="stable"><input type="text"></li></span>
+                <li class="list-group-item">Name:<span class="stable"><input name="name" value="{{patient.firstName}} {{patient.middleName}} {{patient.lastName}}" type="text" disabled /></span></li>
+				<li class="list-group-item">Registration Number:<span class="stable"><input name="regNumber" value="{{patient.regNumber}}" type="text" disabled></span></li>
+				<li class="list-group-item">Doctor on File:<span class="stable"><input disabled value="{{complain.doctorName}}" type="text"></span></li>
+				<li class="list-group-item">Nurse on File:<span class="stable"><input name="nurse" value="{{complain.nurse}}" type="text" disabled></span></li>
+				<li class="list-group-item">Gender:<span class="stable"><input name="gender" value="{{patient.gender}}" type="text" disabled></span></li>
+				<li class="list-group-item">Date-Of-Birth: <span class="stable"><input name="dateOfBirth" value="{{patient.dateOfBirth}}" disabled type="text"></span></li>
             </ul>
         </div>
     </div>
     <div class="doc">
         <h4 class="true"> DOCTOR'S NOTE:</h4>
-        <textarea name="" id="" cols="95" rows="7" class=""></textarea>
+        <textarea disabled name="" id="" cols="95" rows="7" class="">{{doctor.doctorNote}}</textarea>
     </div>
     <div class="doc">
         <h4 class="true">LIST:</h4>
+        
         <table class="table table-light">
             <thead class="table-primary">
             <tr>
@@ -36,36 +37,40 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td><input type="text"></td>
-                <td><input type="text"></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td><input type="text"></td>
-                <td><input type="text"></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td><input type="text"></td>
-                <td><input type="text"></td>
-            </tr>
+                {% for test in labTests %}
+                <tr>
+                    <td>{{test.id}}</td>
+                    <td>{{test.test_run}}</td>
+                    <td>{{test.amount}} Naira</td>
+                    <td></td>
+                </tr>
+                {% endfor%}
+                <tr>
+                    <form method="post" onsubmit="totalCost(event)">
+                        {% csrf_token %}
+                    <td></td>
+                    <td>{{form.test_run}}</td>
+                    <td>{{form.amount}}</td>
+                    <td><input value="add" type="submit"></td>
+                    </form>
+                </tr>
+            
             </tbody>
             <tfoot>
             <tr>
                 <td>Total</td>
                 <td></td>
-                <td><input type="text"></td>
+                <td>{{total}}</td>
             </tr>
             </tfoot>
 
 
         </table>
-        <p>You are to continue to the billing page or back to homepage</p>
+    
+        <p>You are to continue to the billing page or back to doctor page</p>
         <span>
-                    <button class="btn btn-success"><a class="text-light" href="billing.html">CONTINUE</a></button>
-                    <button class="btn btn-danger"><a class="text-light" href="index.html">BACK</a></button>
+                    <button class="btn btn-success"><a class="text-light" href="{% url 'billing' slug=complain.id %}">CONTINUE</a></button>
+                    <button class="btn btn-danger"><a class="text-light" href="{% url 'index' %}">BACK</a></button>
                 </span>
     </div>
 </div>

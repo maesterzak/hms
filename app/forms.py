@@ -48,12 +48,22 @@ class DocForm(ModelForm):
         super(DocForm, self).__init__(*args, **kwargs)
 
 
-class LabForm(ModelForm):
+class LabItemsForm(ModelForm):
     class Meta:
-        model=Lab
+        model=LabItems
         fields = '__all__'
-        exclude = ['complain']
+        exclude = ['lab']
 
     def __init__(self, *args, **kwargs):
-        super(LabForm, self).__init__(*args, **kwargs)
+        super(LabItemsForm, self).__init__(*args, **kwargs)
+
+
+class PharmacyItemsForm(ModelForm):
+    class Meta:
+        model=PharmacyItems
+        fields = '__all__'
+        exclude = ['pharmacy']
+
+    def __init__(self, *args, **kwargs):
+        super(PharmacyItemsForm, self).__init__(*args, **kwargs)        
 
