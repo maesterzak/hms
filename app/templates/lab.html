@@ -70,7 +70,7 @@
         <p>You are to continue to the billing page or back to doctor page</p>
         <span>
                     <button class="btn btn-success"><a class="text-light" href="{% url 'billing' slug=complain.id %}">CONTINUE</a></button>
-                    <button class="btn btn-danger"><a class="text-light" href="{% url 'index' %}">BACK</a></button>
+                    <button class="btn btn-danger"><a class="text-light" href="{% url 'doctor' slug=complain.id %}">BACK</a></button>
                 </span>
     </div>
 </div>
